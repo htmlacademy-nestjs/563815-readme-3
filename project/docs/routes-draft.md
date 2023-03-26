@@ -245,8 +245,6 @@ export class GetPostErrorResponse {
 
 ### GET blog.com/api/posts/:id/likes
 
-```typescript
-
 ## photos.com
 
 ### POST users.com/api/new
