@@ -2,7 +2,7 @@
 
 ## users.com
 
-### POST users.com/api/users/new
+### POST users.com/api/auth/new-user
 
 email unique; date created; password hash bcrypt;
 
@@ -27,7 +27,7 @@ export class CreateUserErrorResponse {
 }
 ```
 
-### POST users.com/api/users/login
+### POST users.com/api/auth/login
 
 ```typescript
 export class LoginUserDto {
@@ -48,7 +48,7 @@ export class LoginUserErrorResponse {
 }
 ```
 
-### POST users.com/api/users/change-password
+### POST users.com/api/auth/change-password
 
 ```typescript
 export class ChangePasswordDto {
@@ -71,7 +71,7 @@ export class ChangePasswordErrorResponse {
 }
 ```
 
-### POST users.com/api/users/logout
+### POST users.com/api/auth/logout
 
 ```typescript
 export class LogoutUserDto {
