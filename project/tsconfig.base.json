@@ -1,0 +1,25 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "noEmit": true,
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2017", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@project/shared/shared-types": ["libs/shared/shared-types/src/index.ts"],
+      "@project/util/util-core": ["libs/util/util-core/src/index.ts"],
+      "@project/util/util-types": ["libs/util/util-types/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}
