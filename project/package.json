@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "lint:ts": "nx workspace-lint && nx run-many --target=lint --all --parallel"
+    "lint:ts": "nx workspace-lint && nx run-many --target=lint --all --parallel",
+    "format:write": "nx format:write"
   },
   "private": true,
   "dependencies": {

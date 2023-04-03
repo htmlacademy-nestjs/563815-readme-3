@@ -1,11 +1,12 @@
-import { CRUDRepository } from "@project/util/util-types";
-import { UserRepositoryEntity } from "./user-repository-entity";
-import { RepositoryUser } from "@project/shared/shared-types";
-import { Injectable } from "@nestjs/common";
+import { CRUDRepository } from '@project/util/util-types';
+import { UserRepositoryEntity } from './user-repository-entity';
+import { RepositoryUser } from '@project/shared/shared-types';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class UsersRepository
-  implements CRUDRepository<UserRepositoryEntity, string, RepositoryUser> {
+  implements CRUDRepository<UserRepositoryEntity, string, RepositoryUser>
+{
   private repository: { [key: string]: RepositoryUser } = {};
 
   public async create(item: UserRepositoryEntity): Promise<RepositoryUser> {
@@ -39,7 +40,10 @@ export class UsersRepository
     delete this.repository[id];
   }
 
-  public async update(id: string, item: UserRepositoryEntity): Promise<RepositoryUser> {
+  public async update(
+    id: string,
+    item: UserRepositoryEntity
+  ): Promise<RepositoryUser> {
     this.repository[id] = { ...item.toObject(), id };
     return this.findById(id);
   }

@@ -1,4 +1,4 @@
-import {registerAs} from '@nestjs/config';
+import { registerAs } from '@nestjs/config';
 import * as Joi from 'joi';
 
 const DEFAULT_MONGO_PORT = 27017;
@@ -31,12 +31,12 @@ export default registerAs('db', (): DbConfig => {
     authBase: Joi.string().required(),
   });
 
-  const {error} = validationSchema.validate(config, {abortEarly: true});
+  const { error } = validationSchema.validate(config, { abortEarly: true });
 
   if (error) {
     throw new Error(
       `[DB Config]: Environments validation failed. Please check .env file.
-      Error message: ${error.message}`,
+      Error message: ${error.message}`
     );
   }
 

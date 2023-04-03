@@ -101,13 +101,13 @@ export class GetUserDto {
 
 ```typescript
 export class GetUserResponse {
-  public id: string
-  public registrationDate: string
-  public email: string
-  public name: string
-  public photoUrl: string
-  public postsCount: string // ANOTHER APP
-  public followersCount: string // ANOTHER APP
+  public id: string;
+  public registrationDate: string;
+  public email: string;
+  public name: string;
+  public photoUrl: string;
+  public postsCount: string; // ANOTHER APP
+  public followersCount: string; // ANOTHER APP
 }
 ```
 
@@ -120,11 +120,11 @@ export class GetUserErrorResponse {
 ## blog.com
 
 ```typescript
-export type PostType = "video" | "text" | "quote" | "photo" | "link";
+export type PostType = 'video' | 'text' | 'quote' | 'photo' | 'link';
 ```
 
 ```typescript
-export type PostStatus = "draft" | "published" | "archived";
+export type PostStatus = 'draft' | 'published' | 'archived';
 ```
 
 ```typescript
@@ -233,7 +233,7 @@ export class GetPostResponse {
   public tags: PostTag[];
   public quoteAuthor?: string;
   public text?: string;
-  public announcement?: string
+  public announcement?: string;
 }
 ```
 

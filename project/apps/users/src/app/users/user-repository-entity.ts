@@ -1,7 +1,7 @@
-import { RepositoryUser } from "@project/shared/shared-types";
-import { nanoid } from "nanoid";
-import { genSalt, hash } from "bcrypt";
-import { SALT_ROUNDS } from "./constants";
+import { RepositoryUser } from '@project/shared/shared-types';
+import { nanoid } from 'nanoid';
+import { genSalt, hash } from 'bcrypt';
+import { SALT_ROUNDS } from './constants';
 
 export class UserRepositoryEntity implements RepositoryUser {
   public id: string;
@@ -9,7 +9,7 @@ export class UserRepositoryEntity implements RepositoryUser {
   public name: string;
   public passwordHash: string;
 
-  constructor(user: Omit<RepositoryUser, "id" | "passwordHash">) {
+  constructor(user: Omit<RepositoryUser, 'id' | 'passwordHash'>) {
     this.email = user.email;
     this.name = user.name;
     this.id = nanoid();
