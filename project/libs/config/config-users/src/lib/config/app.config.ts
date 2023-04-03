@@ -1,5 +1,5 @@
-import { registerAs } from '@nestjs/config';
 import * as Joi from 'joi';
+import { registerAs } from '@nestjs/config';
 
 const DEFAULT_PORT = 3000;
 

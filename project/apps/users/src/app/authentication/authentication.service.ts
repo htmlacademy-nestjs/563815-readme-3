@@ -5,19 +5,19 @@ import {
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
-import { compare } from 'bcrypt';
-import { UsersRepository } from '../users/users.repository';
-import { CreateUserDto } from './dto/create-user.dto';
 import {
   ERROR_PASSWORDS_NOT_MATCH,
   ERROR_USER_EXISTS,
   ERROR_USER_NOT_FOUND,
   ERROR_USER_PASSWORD_WRONG,
 } from './constants';
-import { UserRepositoryEntity } from '../users/user-repository-entity';
-import { LoginUserDto } from './dto/login-user.dto';
 import { ChangePasswordDto } from './dto/change-password.dto';
 import { ConfigType } from '@nestjs/config';
+import { CreateUserDto } from './dto/create-user.dto';
+import { LoginUserDto } from './dto/login-user.dto';
+import { UserRepositoryEntity } from '../users/user-repository-entity';
+import { UsersRepository } from '../users/users.repository';
+import { compare } from 'bcrypt';
 import { dbConfig } from '@project/config/config-users';
 
 @Injectable()

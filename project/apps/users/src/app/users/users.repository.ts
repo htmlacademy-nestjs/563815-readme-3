@@ -1,7 +1,7 @@
 import { CRUDRepository } from '@project/util/util-types';
-import { UserRepositoryEntity } from './user-repository-entity';
-import { RepositoryUser } from '@project/shared/shared-types';
 import { Injectable } from '@nestjs/common';
+import { RepositoryUser } from '@project/shared/shared-types';
+import { UserRepositoryEntity } from './user-repository-entity';
 
 @Injectable()
 export class UsersRepository

@@ -1,8 +1,8 @@
-import { Controller, Get, HttpStatus, Param } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Controller, Get, HttpStatus, Param } from '@nestjs/common';
 import { UserRdo } from './rdo/user.rdo';
-import { fillObject } from '@project/util/util-core';
 import { UsersService } from './users.service';
+import { fillObject } from '@project/util/util-core';
 
 @ApiTags('users')
 @Controller('users')

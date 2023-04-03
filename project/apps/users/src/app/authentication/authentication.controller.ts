@@ -1,3 +1,4 @@
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import {
   Body,
   Controller,
@@ -6,13 +7,12 @@ import {
   Post,
   UnauthorizedException,
 } from '@nestjs/common';
-import { AuthenticationService } from './authentication.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { AccessTokenRdo } from './rdo/access-token.rdo';
-import { LoginUserDto } from './dto/login-user.dto';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ERROR_GENERIC_ERROR, SUCCESS_USER_CREATED } from './constants';
+import { AccessTokenRdo } from './rdo/access-token.rdo';
+import { AuthenticationService } from './authentication.service';
 import { ChangePasswordDto } from './dto/change-password.dto';
+import { CreateUserDto } from './dto/create-user.dto';
+import { LoginUserDto } from './dto/login-user.dto';
 import { SuccessMessageRdo } from './rdo/success-message.rdo';
 
 @ApiTags('authentication')
