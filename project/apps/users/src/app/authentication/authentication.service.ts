@@ -1,5 +1,6 @@
 import {
   ConflictException,
+  Inject,
   Injectable,
   NotFoundException,
   UnauthorizedException,
@@ -16,10 +17,19 @@ import {
 import { UserRepositoryEntity } from '../users/user-repository-entity';
 import { LoginUserDto } from './dto/login-user.dto';
 import { ChangePasswordDto } from './dto/change-password.dto';
+import { ConfigType } from '@nestjs/config';
+import { dbConfig } from '@project/config/config-users';
 
 @Injectable()
 export class AuthenticationService {
-  constructor(private readonly usersRepository: UsersRepository) {}
+  constructor(
+    private readonly usersRepository: UsersRepository,
+    @Inject(dbConfig.KEY)
+    private readonly databaseConfig: ConfigType<typeof dbConfig>
+  ) {
+    console.log(databaseConfig.host);
+    console.log(databaseConfig.user);
+  }
 
   public async createNewUser(dto: CreateUserDto) {
     const { email, name, password, passwordConfirmation } = dto;
