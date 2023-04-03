@@ -4,7 +4,8 @@
   "license": "MIT",
   "scripts": {
     "lint:ts": "nx workspace-lint && nx run-many --target=lint --all --parallel",
-    "format:write": "nx format:write"
+    "format:write": "nx format:write",
+    "tsc": "tsc -p tsconfig.base.json --noEmit --skipLibCheck"
   },
   "private": true,
   "dependencies": {
