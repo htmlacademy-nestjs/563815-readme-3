@@ -1,11 +1,15 @@
-import { Expose } from "class-transformer";
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty } from '@nestjs/swagger';
+import { Expose } from 'class-transformer';
 
 export class SuccessMessageRdo {
   @ApiProperty({
-    description: "Message about successfully operation completion",
-    example: "Operation was successfully completed"
+    description: 'Message about successfully operation completion',
+    example: 'Operation was successfully completed',
   })
   @Expose()
   public message: string;
+
+  constructor(data: SuccessMessageRdo) {
+    this.message = data.message;
+  }
 }

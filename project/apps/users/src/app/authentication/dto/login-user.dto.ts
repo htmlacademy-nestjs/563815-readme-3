@@ -12,4 +12,9 @@ export class LoginUserDto {
     example: '123456',
   })
   public password: string;
+
+  constructor(data: LoginUserDto) {
+    this.email = data.email;
+    this.password = data.password;
+  }
 }
