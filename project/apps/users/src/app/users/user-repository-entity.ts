@@ -1,27 +1,17 @@
-import { genSalt, hash } from 'bcrypt';
-import { RepositoryUser } from '@project/shared/shared-types';
-import { SALT_ROUNDS } from './constants';
-import { nanoid } from 'nanoid';
+import { UserStored } from '@project/shared/shared-types';
 
-export class UserRepositoryEntity implements RepositoryUser {
-  public id: string;
+export class UserRepositoryEntity implements UserStored {
   public email: string;
   public name: string;
   public passwordHash: string;
 
-  constructor(user: Omit<RepositoryUser, 'id' | 'passwordHash'>) {
+  constructor(user: UserStored) {
     this.email = user.email;
     this.name = user.name;
-    this.id = nanoid();
+    this.passwordHash = user.passwordHash;
   }
 
   public toObject() {
     return { ...this };
-  }
-
-  public async setPassword(password: string): Promise<UserRepositoryEntity> {
-    const salt = await genSalt(SALT_ROUNDS);
-    hash(password, salt);
-    return this;
   }
 }

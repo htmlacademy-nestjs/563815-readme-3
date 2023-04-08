@@ -16,12 +16,12 @@ export class DatabaseEnvironment {
   @IsString({
     message: EnvValidationMessage.DBNameRequired,
   })
-  public name: string;
+  public name?: string;
 
   @IsString({
     message: EnvValidationMessage.DBHostRequired,
   })
-  public host: string;
+  public host?: string;
 
   @IsNumber(
     {},
@@ -31,20 +31,20 @@ export class DatabaseEnvironment {
   )
   @Min(MIN_PORT)
   @Max(MAX_PORT)
-  public port: number;
+  public port?: number;
 
   @IsString({
     message: EnvValidationMessage.DBUserRequired,
   })
-  public user: string;
+  public user?: string;
 
   @IsString({
     message: EnvValidationMessage.DBPasswordRequired,
   })
-  public password: string;
+  public password?: string;
 
   @IsString({
     message: EnvValidationMessage.DBBaseAuthRequired,
   })
-  public authBase: string;
+  public authBase?: string;
 }

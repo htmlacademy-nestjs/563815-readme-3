@@ -8,4 +8,8 @@ export class AccessTokenRdo {
   })
   @Expose()
   public accessToken: string;
+
+  constructor(data: AccessTokenRdo) {
+    this.accessToken = data.accessToken;
+  }
 }

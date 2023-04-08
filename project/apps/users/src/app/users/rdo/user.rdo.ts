@@ -22,4 +22,10 @@ export class UserRdo {
   })
   @Expose()
   public name: string;
+
+  constructor(data: UserRdo) {
+    this.id = data.id;
+    this.email = data.email;
+    this.name = data.name;
+  }
 }

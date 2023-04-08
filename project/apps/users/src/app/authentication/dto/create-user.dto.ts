@@ -24,4 +24,11 @@ export class CreateUserDto {
     example: '123456',
   })
   public passwordConfirmation: string;
+
+  constructor(data: CreateUserDto) {
+    this.email = data.email;
+    this.name = data.name;
+    this.password = data.password;
+    this.passwordConfirmation = data.passwordConfirmation;
+  }
 }

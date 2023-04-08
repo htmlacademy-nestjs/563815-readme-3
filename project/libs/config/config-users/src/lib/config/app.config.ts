@@ -4,7 +4,7 @@ import { registerAs } from '@nestjs/config';
 const DEFAULT_PORT = 3000;
 
 export interface ApplicationConfig {
-  environment: string;
+  environment?: string;
   port: number;
 }
 

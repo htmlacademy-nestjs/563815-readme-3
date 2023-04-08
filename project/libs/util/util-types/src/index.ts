@@ -3,7 +3,7 @@ export interface CRUDRepository<Entity, Id, Result> {
 
   create(item: Entity): Promise<Result>;
 
-  update(id: Id, item: Entity): Promise<Result>;
+  update(id: Id, item: Entity): void;
 
   destroy(id: Id): Promise<void>;
 }

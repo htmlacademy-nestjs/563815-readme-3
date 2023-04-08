@@ -19,6 +19,7 @@ import { UserRepositoryEntity } from '../users/user-repository-entity';
 import { UsersRepository } from '../users/users.repository';
 import { compare } from 'bcrypt';
 import { dbConfig } from '@project/config/config-users';
+import { generatePassword } from '@project/util/util-core';
 
 @Injectable()
 export class AuthenticationService {
@@ -49,7 +50,8 @@ export class AuthenticationService {
     const userEntity = await new UserRepositoryEntity({
       name,
       email,
-    }).setPassword(password);
+      passwordHash: await generatePassword(password),
+    });
 
     return this.usersRepository.create(userEntity);
   }
@@ -74,26 +76,32 @@ export class AuthenticationService {
   public async changePassword(data: ChangePasswordDto) {
     const user = await this.usersRepository.findById(data.id);
 
-    const arePasswordTheSame = await compare(
-      data.oldPassword,
-      user.passwordHash
-    );
+    if (user) {
+      const arePasswordTheSame = await compare(
+        data.oldPassword,
+        user.passwordHash
+      );
 
-    if (arePasswordTheSame) {
-      throw new UnauthorizedException(ERROR_USER_PASSWORD_WRONG);
+      if (arePasswordTheSame) {
+        throw new UnauthorizedException(ERROR_USER_PASSWORD_WRONG);
+      }
+
+      const isPasswordConfirmed =
+        data.newPassword === data.newPasswordConfirmation;
+
+      if (!isPasswordConfirmed) {
+        throw new ConflictException(ERROR_PASSWORDS_NOT_MATCH);
+      }
+
+      const userEntity = new UserRepositoryEntity({
+        name: user.name,
+        email: user.email,
+        passwordHash: await generatePassword(data.newPassword),
+      });
+
+      await this.usersRepository.update(data.id, userEntity);
+    } else {
+      throw new ConflictException(ERROR_USER_NOT_FOUND);
     }
-
-    const isPasswordConfirmed =
-      data.newPassword === data.newPasswordConfirmation;
-
-    if (!isPasswordConfirmed) {
-      throw new ConflictException(ERROR_PASSWORDS_NOT_MATCH);
-    }
-
-    const userEntity = new UserRepositoryEntity(user);
-
-    await userEntity.setPassword(data.newPassword);
-
-    return this.usersRepository.update(data.id, userEntity);
   }
 }

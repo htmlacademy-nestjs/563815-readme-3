@@ -65,6 +65,6 @@ export class AuthenticationController {
   @Post('change-password')
   @HttpCode(HttpStatus.OK)
   public async changePassword(@Body() dto: ChangePasswordDto) {
-    const wasChanged = await this.authService.changePassword(dto);
+    await this.authService.changePassword(dto);
   }
 }

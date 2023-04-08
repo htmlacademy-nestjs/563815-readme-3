@@ -5,7 +5,8 @@
   "scripts": {
     "lint:ts": "nx workspace-lint --fix && nx run-many --target=lint --all --parallel",
     "format:write": "nx format:write",
-    "tsc": "tsc -p tsconfig.base.json --noEmit --skipLibCheck"
+    "tsc": "tsc -p tsconfig.base.json --noEmit --skipLibCheck",
+    "run:users": "nx run users:serve"
   },
   "private": true,
   "dependencies": {
@@ -15,6 +16,7 @@
     "@nestjs/mongoose": "^9.2.2",
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/swagger": "^6.2.1",
+    "@types/bcrypt": "^5.0.0",
     "axios": "^1.0.0",
     "bcrypt": "^5.1.0",
     "class-transformer": "^0.5.1",

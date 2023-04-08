@@ -8,4 +8,8 @@ export class SuccessMessageRdo {
   })
   @Expose()
   public message: string;
+
+  constructor(data: SuccessMessageRdo) {
+    this.message = data.message;
+  }
 }
