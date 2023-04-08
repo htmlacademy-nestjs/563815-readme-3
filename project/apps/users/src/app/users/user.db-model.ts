@@ -29,4 +29,4 @@ export class UserDbModel extends Document implements UserStored {
   }
 }
 
-export const UserSchema = SchemaFactory.createForClass(UserDbModel);
+export const UserDbModelSchema = SchemaFactory.createForClass(UserDbModel);
