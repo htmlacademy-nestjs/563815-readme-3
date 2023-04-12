@@ -27,10 +27,7 @@ export class AuthenticationService {
     private readonly usersRepository: UsersRepository,
     @Inject(dbConfig.KEY)
     private readonly databaseConfig: ConfigType<typeof dbConfig>
-  ) {
-    console.log(databaseConfig.host);
-    console.log(databaseConfig.user);
-  }
+  ) {}
 
   public async createNewUser(dto: CreateUserDto) {
     const { email, name, password, passwordConfirmation } = dto;
