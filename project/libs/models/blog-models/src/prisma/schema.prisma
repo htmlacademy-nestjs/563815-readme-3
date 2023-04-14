@@ -11,22 +11,24 @@ datasource db {
 }
 
 model Post {
-  id             Int        @id @default(autoincrement())
-  title          String?    @default("")
-  author         Author     @relation(name: "author", fields: [id], references: [id], map: "post_author")
-  originalAuthor Author     @relation(name: "original_author", fields: [id], references: [id], map: "post_original_author")
-  createdAt      DateTime   @default(now()) @map("created_at")
-  updatedAt      DateTime   @updatedAt @map("updated_at")
-  publishedAt    DateTime   @default(now()) @map("published_at")
-  status         PostStatus @default(draft)
-  isRepost       Boolean    @default(false) @map("is_repost")
-  originalPostId Int        @map("original_post_id")
-  tags           Tag[]
-  comment        Comment[]
-  quoteAuthor    String?    @map("quote_author")
-  text           String?    @default("")
-  announcement   String?    @default("")
-  type           PostType   @default(text)
+  id               Int        @id @default(autoincrement())
+  title            String?    @default("")
+  author           Author     @relation(name: "author", fields: [authorId], references: [id], map: "post_author")
+  authorId         Int        @map("author_id")
+  originalAuthor   Author     @relation(name: "original_author", fields: [originalAuthorId], references: [id], map: "post_original_author")
+  originalAuthorId Int        @map("original_author_id")
+  createdAt        DateTime   @default(now()) @map("created_at")
+  updatedAt        DateTime   @updatedAt @map("updated_at")
+  publishedAt      DateTime   @default(now()) @map("published_at")
+  status           PostStatus @default(draft)
+  isRepost         Boolean    @default(false) @map("is_repost")
+  originalPostId   Int        @map("original_post_id")
+  tags             Tag[]
+  comment          Comment[]
+  quoteAuthor      String?    @map("quote_author")
+  text             String?    @default("")
+  announcement     String?    @default("")
+  type             PostType   @default(text)
 
   @@map("posts")
 }
