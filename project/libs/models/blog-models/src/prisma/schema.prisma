@@ -29,6 +29,7 @@ model Post {
   text             String?    @default("")
   announcement     String?    @default("")
   type             PostType   @default(text)
+  externalUrl      String?    @map("external_url")
 
   @@map("posts")
 }
