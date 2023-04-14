@@ -13,7 +13,7 @@ services:
       - readme.postgres.blog:/var/lib/postgresql/data
 
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U admin -d test" ]
+      test: ['CMD-SHELL', 'pg_isready -U admin -d test']
       interval: 10s
       timeout: 5s
       retries: 5
@@ -26,9 +26,9 @@ services:
     image: dpage/pgadmin4
     container_name: readme.blog.pgadmin
     environment:
-      PGADMIN_DEFAULT_EMAIL: "keks@htmlacademy.local"
-      PGADMIN_DEFAULT_PASSWORD: "test"
-      PGADMIN_CONFIG_SERVER_MODE: "False"
+      PGADMIN_DEFAULT_EMAIL: 'keks@htmlacademy.local'
+      PGADMIN_DEFAULT_PASSWORD: 'test'
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
     ports:
       - 8082:80
     networks:
