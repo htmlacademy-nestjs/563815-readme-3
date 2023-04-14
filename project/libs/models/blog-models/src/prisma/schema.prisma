@@ -9,3 +9,66 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Post {
+  id             Int        @id @default(autoincrement())
+  title          String?    @default("")
+  author         Author     @relation(name: "author", fields: [id], references: [id], map: "post_author")
+  originalAuthor Author     @relation(name: "original_author", fields: [id], references: [id], map: "post_original_author")
+  createdAt      DateTime   @default(now()) @map("created_at")
+  updatedAt      DateTime   @updatedAt @map("updated_at")
+  publishedAt    DateTime   @default(now()) @map("published_at")
+  status         PostStatus @default(draft)
+  isRepost       Boolean    @default(false) @map("is_repost")
+  originalPostId Int        @map("original_post_id")
+  tags           Tag[]
+  comment        Comment[]
+  quoteAuthor    String?    @map("quote_author")
+  text           String?    @default("")
+  announcement   String?    @default("")
+  type           PostType   @default(text)
+
+  @@map("posts")
+}
+
+model Tag {
+  id    Int    @id @default(autoincrement())
+  name  String @default("")
+  posts Post[]
+
+  @@map("tags")
+}
+
+model Author {
+  id            Int    @id @default(autoincrement())
+  name          String @default("")
+  allPosts      Post[] @relation(name: "author")
+  originalPosts Post[] @relation(name: "original_author")
+
+  @@map("authors")
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement()) @map("comment_id")
+  message   String
+  userId    Int      @map("user_id")
+  posts     Post[]
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("comments")
+}
+
+enum PostStatus {
+  draft
+  published
+  archived
+}
+
+enum PostType {
+  video
+  text
+  quote
+  photo
+  link
+}
