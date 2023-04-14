@@ -22,7 +22,7 @@ model Post {
   publishedAt      DateTime   @default(now()) @map("published_at")
   status           PostStatus @default(draft)
   isRepost         Boolean    @default(false) @map("is_repost")
-  originalPostId   Int        @map("original_post_id")
+  originalPostId   Int?       @map("original_post_id")
   tags             Tag[]
   comment          Comment[]
   quoteAuthor      String?    @map("quote_author")
