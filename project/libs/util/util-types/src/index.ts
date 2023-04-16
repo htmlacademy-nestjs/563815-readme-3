@@ -1,9 +1,11 @@
-export interface CRUDRepository<Entity, Id, Result> {
-  findById(id: Id): Promise<Result | null>;
+export interface CRUDRepository<InputType, OutputType, Id> {
+  find?(): Promise<OutputType[]>;
 
-  create(item: Entity): Promise<Result>;
+  findById?(id: Id): Promise<OutputType | null>;
 
-  update(id: Id, item: Entity): void;
+  create?(item: InputType): Promise<void>;
 
-  destroy(id: Id): Promise<void>;
+  update?(id: Id, item: InputType): Promise<void>;
+
+  destroy?(id: Id): Promise<void>;
 }

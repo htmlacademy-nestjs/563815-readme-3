@@ -2,7 +2,6 @@ import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Controller, Get, HttpStatus, Param } from '@nestjs/common';
 import { UserRdo } from './rdo/user.rdo';
 import { UsersService } from './users.service';
-import { fillObject } from '@project/util/util-core';
 
 @ApiTags('users')
 @Controller('users')
@@ -16,7 +15,6 @@ export class UsersController {
   })
   @Get(':id')
   public async show(@Param('id') id: string) {
-    const existUser = await this.usersService.getUser(id);
-    return fillObject(UserRdo, existUser);
+    return this.usersService.getUser(id);
   }
 }
