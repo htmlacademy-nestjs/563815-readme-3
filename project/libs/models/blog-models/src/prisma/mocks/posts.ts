@@ -1,11 +1,15 @@
-import { Post, PostStatus, PostType } from '@prisma/client';
+import {
+  DatabasePost,
+  DatabasePostStatus,
+  DatabasePostType,
+} from '@prisma/client';
 import { danielAuthorMock, sarahAuthorMock } from './authors';
 
-export const videoPostMock: Post = {
-  type: PostType.video,
+export const videoPostMock: DatabasePost = {
+  type: DatabasePostType.video,
   id: 1,
   authorId: danielAuthorMock.id,
-  status: PostStatus.published,
+  status: DatabasePostStatus.published,
 
   createdAt: new Date(),
   updatedAt: new Date(),
@@ -23,20 +27,20 @@ export const videoPostMock: Post = {
   text: null,
 };
 
-export const textPostMock: Post = {
-  type: PostType.text,
+export const textPostMock: DatabasePost = {
+  type: DatabasePostType.text,
   id: 2,
   authorId: sarahAuthorMock.id,
-  status: PostStatus.draft,
+  status: DatabasePostStatus.draft,
 
   createdAt: new Date(),
   updatedAt: new Date(),
   publishedAt: new Date(),
 
-  title: 'About the text post and how to make it',
+  title: 'About the text DatabasePost and how to make it',
   announcement:
-    "This is a text post. It doesn't have a title, but it has a text.",
-  text: "So, this is a text post. It doesn't have a title, but it has a text. It's a text post.",
+    "This is a text DatabasePost. It doesn't have a title, but it has a text.",
+  text: "So, this is a text DatabasePost. It doesn't have a title, but it has a text. It's a text DatabasePost.",
 
   isRepost: false,
   originalAuthorId: null,
@@ -46,11 +50,11 @@ export const textPostMock: Post = {
   quoteAuthor: null,
 };
 
-export const quotePostMock: Post = {
-  type: PostType.text,
+export const quotePostMock: DatabasePost = {
+  type: DatabasePostType.text,
   id: 3,
   authorId: danielAuthorMock.id,
-  status: PostStatus.draft,
+  status: DatabasePostStatus.draft,
 
   createdAt: new Date(),
   updatedAt: new Date(),
@@ -68,11 +72,11 @@ export const quotePostMock: Post = {
   externalUrl: null,
 };
 
-export const photoPostMock: Post = {
-  type: PostType.photo,
+export const photoPostMock: DatabasePost = {
+  type: DatabasePostType.photo,
   id: 4,
   authorId: sarahAuthorMock.id,
-  status: PostStatus.archived,
+  status: DatabasePostStatus.archived,
 
   createdAt: new Date(),
   updatedAt: new Date(),
@@ -90,11 +94,11 @@ export const photoPostMock: Post = {
   text: null,
 };
 
-export const linkPostMock: Post = {
-  type: PostType.link,
+export const linkPostMock: DatabasePost = {
+  type: DatabasePostType.link,
   id: 5,
   authorId: danielAuthorMock.id,
-  status: PostStatus.published,
+  status: DatabasePostStatus.published,
 
   createdAt: new Date(),
   updatedAt: new Date(),

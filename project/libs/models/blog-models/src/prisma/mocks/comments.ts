@@ -1,6 +1,6 @@
-import { Comment } from '@prisma/client';
+import { DatabaseComment } from '@prisma/client';
 
-export const happyCommentMock: Comment = {
+export const happyCommentMock: DatabaseComment = {
   id: 1,
   userId: 1,
   message: 'This is a happy comment',
@@ -9,7 +9,7 @@ export const happyCommentMock: Comment = {
   updatedAt: new Date(),
 };
 
-export const sadCommentMock: Comment = {
+export const sadCommentMock: DatabaseComment = {
   id: 2,
   userId: 2,
   message: 'This is a sad comment',
@@ -18,7 +18,7 @@ export const sadCommentMock: Comment = {
   updatedAt: new Date(),
 };
 
-export const angryCommentMock: Comment = {
+export const angryCommentMock: DatabaseComment = {
   id: 3,
   userId: 1,
   message: 'This is an angry comment',
@@ -27,7 +27,7 @@ export const angryCommentMock: Comment = {
   updatedAt: new Date(),
 };
 
-export const questionCommentMock: Comment = {
+export const questionCommentMock: DatabaseComment = {
   id: 4,
   userId: 2,
   message: 'This is a question comment',
@@ -36,7 +36,7 @@ export const questionCommentMock: Comment = {
   updatedAt: new Date(),
 };
 
-export const curiousCommentMock: Comment = {
+export const curiousCommentMock: DatabaseComment = {
   id: 5,
   userId: 1,
   message: 'This is a curious comment',
@@ -45,7 +45,7 @@ export const curiousCommentMock: Comment = {
   updatedAt: new Date(),
 };
 
-export const funnyCommentMock: Comment = {
+export const funnyCommentMock: DatabaseComment = {
   id: 6,
   userId: 2,
   message: 'This is a funny comment',
@@ -54,7 +54,7 @@ export const funnyCommentMock: Comment = {
   updatedAt: new Date(),
 };
 
-export const anxiousCommentMock: Comment = {
+export const anxiousCommentMock: DatabaseComment = {
   id: 7,
   userId: 1,
   message: 'This is an anxious comment',
@@ -63,7 +63,7 @@ export const anxiousCommentMock: Comment = {
   updatedAt: new Date(),
 };
 
-export const bewilderedCommentMock: Comment = {
+export const bewilderedCommentMock: DatabaseComment = {
   id: 8,
   userId: 2,
   message: 'This is a bewildered comment',
@@ -72,7 +72,7 @@ export const bewilderedCommentMock: Comment = {
   updatedAt: new Date(),
 };
 
-export const loveCommentMock: Comment = {
+export const loveCommentMock: DatabaseComment = {
   id: 9,
   userId: 1,
   message: 'This is a love comment',
@@ -81,7 +81,7 @@ export const loveCommentMock: Comment = {
   updatedAt: new Date(),
 };
 
-export const confusedCommentMock: Comment = {
+export const confusedCommentMock: DatabaseComment = {
   id: 10,
   userId: 2,
   message: 'This is a confused comment',
@@ -90,7 +90,7 @@ export const confusedCommentMock: Comment = {
   updatedAt: new Date(),
 };
 
-export const commentsMock: Comment[] = [
+export const commentsMock: DatabaseComment[] = [
   happyCommentMock,
   sadCommentMock,
   angryCommentMock,

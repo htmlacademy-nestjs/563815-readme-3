@@ -10,65 +10,65 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Post {
-  id               Int        @id @default(autoincrement())
-  title            String?    @default("")
-  author           Author     @relation(name: "author", fields: [authorId], references: [id], map: "post_author")
-  authorId         Int        @map("author_id")
-  originalAuthor   Author?    @relation(name: "original_author", fields: [originalAuthorId], references: [id], map: "post_original_author")
-  originalAuthorId Int?       @map("original_author_id")
-  createdAt        DateTime   @default(now()) @map("created_at")
-  updatedAt        DateTime   @updatedAt @map("updated_at")
-  publishedAt      DateTime   @default(now()) @map("published_at")
-  status           PostStatus @default(draft)
-  isRepost         Boolean    @default(false) @map("is_repost")
-  originalPostId   Int?       @map("original_post_id")
-  tags             Tag[]
-  comment          Comment[]
-  quoteAuthor      String?    @map("quote_author")
-  text             String?    @default("")
-  announcement     String?    @default("")
-  type             PostType   @default(text)
-  externalUrl      String?    @map("external_url")
+model DatabasePost {
+  id               Int                @id @default(autoincrement())
+  title            String?            @default("")
+  author           DatabaseAuthor     @relation(name: "author", fields: [authorId], references: [id], map: "post_author")
+  authorId         Int                @map("author_id")
+  originalAuthor   DatabaseAuthor?    @relation(name: "original_author", fields: [originalAuthorId], references: [id], map: "post_original_author")
+  originalAuthorId Int?               @map("original_author_id")
+  createdAt        DateTime           @default(now()) @map("created_at")
+  updatedAt        DateTime           @updatedAt @map("updated_at")
+  publishedAt      DateTime           @default(now()) @map("published_at")
+  status           DatabasePostStatus @default(draft)
+  isRepost         Boolean            @default(false) @map("is_repost")
+  originalPostId   Int?               @map("original_post_id")
+  tags             DatabaseTag[]
+  comments         DatabaseComment[]
+  quoteAuthor      String?            @map("quote_author")
+  text             String?            @default("")
+  announcement     String?            @default("")
+  type             DatabasePostType   @default(text)
+  externalUrl      String?            @map("external_url")
 
   @@map("posts")
 }
 
-model Tag {
-  id    Int    @id @default(autoincrement())
-  name  String @default("")
-  posts Post[]
+model DatabaseTag {
+  id    Int            @id @default(autoincrement())
+  name  String         @default("")
+  posts DatabasePost[]
 
   @@map("tags")
 }
 
-model Author {
-  id            Int    @id @default(autoincrement())
-  name          String @default("")
-  allPosts      Post[] @relation(name: "author")
-  originalPosts Post[] @relation(name: "original_author")
+model DatabaseAuthor {
+  id            Int            @id @default(autoincrement())
+  name          String         @default("")
+  allPosts      DatabasePost[] @relation(name: "author")
+  originalPosts DatabasePost[] @relation(name: "original_author")
 
   @@map("authors")
 }
 
-model Comment {
-  id        Int      @id @default(autoincrement()) @map("comment_id")
+model DatabaseComment {
+  id        Int            @id @default(autoincrement()) @map("comment_id")
   message   String
-  userId    Int      @map("user_id")
-  posts     Post[]
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  userId    Int            @map("user_id")
+  posts     DatabasePost[]
+  createdAt DateTime       @default(now()) @map("created_at")
+  updatedAt DateTime       @updatedAt @map("updated_at")
 
   @@map("comments")
 }
 
-enum PostStatus {
+enum DatabasePostStatus {
   draft
   published
   archived
 }
 
-enum PostType {
+enum DatabasePostType {
   video
   text
   quote

@@ -1,11 +1,11 @@
-import { Author } from '@prisma/client';
+import { DatabaseAuthor } from '@prisma/client';
 
-export const danielAuthorMock: Author = {
+export const danielAuthorMock: DatabaseAuthor = {
   id: 1,
   name: 'Daniel',
 };
 
-export const sarahAuthorMock: Author = {
+export const sarahAuthorMock: DatabaseAuthor = {
   id: 2,
   name: 'Sarah',
 };

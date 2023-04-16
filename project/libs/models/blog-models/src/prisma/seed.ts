@@ -13,13 +13,13 @@ import { tagsMock } from './mocks/tags';
 const prisma = new PrismaClient();
 
 async function fillDb() {
-  await prisma.author.createMany({
+  await prisma.databaseAuthor.createMany({
     data: [danielAuthorMock, sarahAuthorMock],
   });
 
   console.info('️✍️ Authors were filled!');
 
-  await prisma.post.createMany({
+  await prisma.databasePost.createMany({
     data: [
       videoPostMock,
       quotePostMock,
@@ -31,13 +31,13 @@ async function fillDb() {
 
   console.info('️📰 Posts were filled!');
 
-  await prisma.tag.createMany({
+  await prisma.databaseTag.createMany({
     data: tagsMock,
   });
 
   console.info('️🏁 Tags were filled!');
 
-  await prisma.comment.createMany({
+  await prisma.databaseComment.createMany({
     data: commentsMock,
   });
 
