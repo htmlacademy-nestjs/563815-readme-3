@@ -11,11 +11,11 @@ import {
   ERROR_USER_NOT_FOUND,
   ERROR_USER_PASSWORD_WRONG,
 } from './constants';
-import { ChangePasswordDto } from './dto/change-password.dto';
+import {
+  NewPasswordFromClient,
+  UserFromClient,
+} from '@project/shared/shared-types';
 import { ConfigType } from '@nestjs/config';
-import { CreateUserDto } from './dto/create-user.dto';
-import { LoginUserDto } from './dto/login-user.dto';
-import { UserRepositoryEntity } from '../users/user-repository-entity';
 import { UsersRepository } from '../users/users.repository';
 import { compare } from 'bcrypt';
 import { dbConfig } from '@project/config/config-users';
@@ -29,7 +29,7 @@ export class AuthenticationService {
     private readonly databaseConfig: ConfigType<typeof dbConfig>
   ) {}
 
-  public async createNewUser(dto: CreateUserDto) {
+  public async createNewUser(dto: UserFromClient) {
     const { email, name, password, passwordConfirmation } = dto;
 
     const isUserExists = await this.usersRepository.findByEmail(email);
@@ -44,16 +44,16 @@ export class AuthenticationService {
       throw new ConflictException(ERROR_PASSWORDS_NOT_MATCH);
     }
 
-    const userEntity = await new UserRepositoryEntity({
+    const userEntity = {
       name,
       email,
       passwordHash: await generatePassword(password),
-    });
+    };
 
     return this.usersRepository.create(userEntity);
   }
 
-  public async isVerifiedUser(dto: LoginUserDto) {
+  public async isVerifiedUser(dto: UserFromClient) {
     const { email, password } = dto;
     const existUser = await this.usersRepository.findByEmail(email);
 
@@ -70,7 +70,7 @@ export class AuthenticationService {
     return true;
   }
 
-  public async changePassword(data: ChangePasswordDto) {
+  public async changePassword(data: NewPasswordFromClient) {
     const user = await this.usersRepository.findById(data.id);
 
     if (user) {
@@ -90,11 +90,11 @@ export class AuthenticationService {
         throw new ConflictException(ERROR_PASSWORDS_NOT_MATCH);
       }
 
-      const userEntity = new UserRepositoryEntity({
+      const userEntity = {
         name: user.name,
         email: user.email,
         passwordHash: await generatePassword(data.newPassword),
-      });
+      };
 
       await this.usersRepository.update(data.id, userEntity);
     } else {

@@ -8,12 +8,13 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { ERROR_GENERIC_ERROR, SUCCESS_USER_CREATED } from './constants';
+import {
+  NewPasswordFromClient,
+  SuccessMessageRdoApiDescription,
+  UserFromClient,
+} from '@project/shared/shared-types';
 import { AccessTokenRdo } from './rdo/access-token.rdo';
 import { AuthenticationService } from './authentication.service';
-import { ChangePasswordDto } from './dto/change-password.dto';
-import { CreateUserDto } from './dto/create-user.dto';
-import { LoginUserDto } from './dto/login-user.dto';
-import { SuccessMessageRdo } from './rdo/success-message.rdo';
 
 @ApiTags('authentication')
 @Controller('auth')
@@ -21,12 +22,12 @@ export class AuthenticationController {
   constructor(private readonly authService: AuthenticationService) {}
 
   @ApiResponse({
-    type: SuccessMessageRdo,
+    type: SuccessMessageRdoApiDescription,
     status: HttpStatus.CREATED,
     description: 'The new user has been successfully created.',
   })
   @Post('new-user')
-  public async createNewUser(@Body() dto: CreateUserDto) {
+  public async createNewUser(@Body() dto: UserFromClient) {
     await this.authService.createNewUser(dto);
 
     return SUCCESS_USER_CREATED;
@@ -43,7 +44,7 @@ export class AuthenticationController {
   })
   @Post('login')
   @HttpCode(HttpStatus.OK)
-  public async login(@Body() dto: LoginUserDto) {
+  public async login(@Body() dto: UserFromClient) {
     const isVerifiedUser = await this.authService.isVerifiedUser(dto);
 
     if (!isVerifiedUser) {
@@ -54,7 +55,7 @@ export class AuthenticationController {
   }
 
   @ApiResponse({
-    type: SuccessMessageRdo,
+    type: SuccessMessageRdoApiDescription,
     status: HttpStatus.OK,
     description: 'Password has been successfully changed.',
   })
@@ -64,7 +65,7 @@ export class AuthenticationController {
   })
   @Post('change-password')
   @HttpCode(HttpStatus.OK)
-  public async changePassword(@Body() dto: ChangePasswordDto) {
+  public async changePassword(@Body() dto: NewPasswordFromClient) {
     await this.authService.changePassword(dto);
   }
 }

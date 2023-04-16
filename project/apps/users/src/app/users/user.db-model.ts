@@ -1,12 +1,12 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { DatabaseUser } from '@project/shared/shared-types';
 import { Document } from 'mongoose';
-import { UserStored } from '@project/shared/shared-types';
 
 @Schema({
   collection: 'users',
   timestamps: true,
 })
-export class UserDbModel extends Document implements UserStored {
+export class UserDbModel extends Document implements DatabaseUser {
   @Prop()
   public name: string;
 
@@ -21,7 +21,7 @@ export class UserDbModel extends Document implements UserStored {
   })
   public passwordHash: string;
 
-  constructor(user: UserStored) {
+  constructor(user: DatabaseUser) {
     super();
     this.name = user.name;
     this.email = user.email;
