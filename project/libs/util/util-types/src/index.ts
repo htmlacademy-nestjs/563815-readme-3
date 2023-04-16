@@ -7,3 +7,8 @@ export interface CRUDRepository<Entity, Id, Result> {
 
   destroy(id: Id): Promise<void>;
 }
+
+export interface Entity<T> {
+  toObject(): T;
+  fillEntity(entity: T): void;
+}
