@@ -1,6 +1,11 @@
-export type PostType = 'video' | 'text' | 'quote' | 'photo' | 'link';
-
-export type PostStatus = 'draft' | 'published' | 'archived';
+export {
+  Author,
+  Tag,
+  PostType,
+  PostStatus,
+  Post,
+  Comment,
+} from '@prisma/client';
 
 export type UserBase = {
   email: string;
