@@ -11,7 +11,8 @@ export class FileService {
   constructor(
     @Inject(filesConfig.KEY)
     private readonly applicationConfig: ConfigType<typeof filesConfig>
-  ) {}
+  ) {
+  }
 
   public async writeFile(file: Express.Multer.File): Promise<string> {
     const uploadDirectoryPath = this.applicationConfig.uploadDirectory;
@@ -19,6 +20,7 @@ export class FileService {
     if (!uploadDirectoryPath) {
       throw new Error(ERROR_UPLOAD_DIRECTORY_IS_NOT_DEFINED);
     }
+
     const destinationFile = `${uploadDirectoryPath}/${file.originalname}`;
 
     await ensureDir(uploadDirectoryPath);
