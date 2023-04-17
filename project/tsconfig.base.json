@@ -17,6 +17,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@project/config/config-files": ["libs/config/config-files/src/index.ts"],
       "@project/config/config-users": ["libs/config/config-users/src/index.ts"],
       "@project/models/blog-models": ["libs/models/blog-models/src/index.ts"],
       "@project/shared/shared-types": ["libs/shared/shared-types/src/index.ts"],
