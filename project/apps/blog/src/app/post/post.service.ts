@@ -2,8 +2,8 @@ import {
   BlogPostToClient,
   NewBlogPostFromClient,
 } from '@project/shared/shared-types';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { ERROR_POST_NOT_FOUND } from './constants';
-import { Injectable } from '@nestjs/common';
 import { PostRepository } from './post.repository';
 
 @Injectable()
@@ -20,7 +20,7 @@ export class PostService {
     if (post) {
       this.postRepository.destroy(id);
     } else {
-      throw new Error(ERROR_POST_NOT_FOUND);
+      throw new NotFoundException(ERROR_POST_NOT_FOUND);
     }
   }
 
@@ -30,7 +30,7 @@ export class PostService {
     if (post) {
       return post;
     } else {
-      throw new Error(ERROR_POST_NOT_FOUND);
+      throw new NotFoundException(ERROR_POST_NOT_FOUND);
     }
   }
 
@@ -44,7 +44,7 @@ export class PostService {
     if (post) {
       this.postRepository.update(id, dto);
     } else {
-      throw new Error(ERROR_POST_NOT_FOUND);
+      throw new NotFoundException(ERROR_POST_NOT_FOUND);
     }
   }
 }
