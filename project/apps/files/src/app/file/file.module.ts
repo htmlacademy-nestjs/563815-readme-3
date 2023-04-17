@@ -1,4 +1,29 @@
+import { ConfigService } from '@nestjs/config';
+import { FileController } from './file.controller';
+import { FileService } from './file.service';
 import { Module } from '@nestjs/common';
+import { ServeStaticModule } from '@nestjs/serve-static';
 
-@Module({})
+const SERVE_ROOT = '/static';
+
+@Module({
+  imports: [
+    ServeStaticModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => {
+        const rootPath = configService.get<string>(
+          'application.uploadDirectory'
+        );
+        return [
+          {
+            rootPath,
+            serveRoot: SERVE_ROOT,
+          },
+        ];
+      },
+    }),
+  ],
+  providers: [FileService],
+  controllers: [FileController],
+})
 export class FileModule {}
