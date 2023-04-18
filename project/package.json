@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "lint:ts": "nx workspace-lint --fix && nx run-many --target=lint --all --parallel",
+    "lint:ts": "nx run-many --all --target=lint",
     "format:write": "nx format:write",
     "tsc": "tsc -p tsconfig.base.json --noEmit --skipLibCheck",
     "run:users": "nx run users:serve"
