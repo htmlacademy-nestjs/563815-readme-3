@@ -22,6 +22,7 @@ specifiers:
   '@types/bcrypt': ^5.0.0
   '@types/fs-extra': ^11.0.1
   '@types/jest': ^29.4.0
+  '@types/mime-types': ^2.1.1
   '@types/multer': ^1.4.7
   '@types/node': ~18.7.1
   '@typescript-eslint/eslint-plugin': ^5.36.1
@@ -37,6 +38,7 @@ specifiers:
   jest: ^29.4.1
   jest-environment-node: ^29.4.1
   joi: ^17.9.1
+  mime-types: ^2.1.35
   mongoose: ^7.0.3
   nanoid: '3'
   nx: 15.8.9
@@ -66,6 +68,7 @@ dependencies:
   dayjs: 1.11.7
   fs-extra: 11.1.1
   joi: 17.9.1
+  mime-types: 2.1.35
   mongoose: 7.0.4
   nanoid: 3.3.6
   prisma: 4.12.0
@@ -86,6 +89,7 @@ devDependencies:
   '@nrwl/workspace': 15.8.9_tx47fqhk7b5vn64nb7jihe3l7q
   '@types/fs-extra': 11.0.1
   '@types/jest': 29.5.0
+  '@types/mime-types': 2.1.1
   '@types/multer': 1.4.7
   '@types/node': 18.7.23
   '@typescript-eslint/eslint-plugin': 5.59.0_2s5jnal7xjjsrjli6mowshldxm
@@ -2915,6 +2919,10 @@ packages:
     resolution: {integrity: sha512-GSgiRCVeapDN+3pqA35IkQwasaCh/0YFH5dEF6S88iDvEn901DjOeH3/QPY+XYP1DFzDZPvIvfeEgk+7br5png==}
     dependencies:
       '@types/node': 18.7.23
+    dev: true
+
+  /@types/mime-types/2.1.1:
+    resolution: {integrity: sha512-vXOTGVSLR2jMw440moWTC7H19iUyLtP3Z1YTj7cSsubOICinjMxFeb/V57v9QdyyPGbbWolUFSSmSiRSn94tFw==}
     dev: true
 
   /@types/mime/3.0.1:
