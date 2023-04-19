@@ -5,6 +5,7 @@ const DEFAULT_PORT = 3000;
 const DEFAULT_MONGO_PORT = 27018;
 
 export interface FilesConfig {
+  serveRoot?: string;
   environment?: string;
   uploadDirectory?: string;
   port?: number;
@@ -20,6 +21,7 @@ export interface FilesConfig {
 
 export default registerAs('application', (): FilesConfig => {
   const config: FilesConfig = {
+    serveRoot: process.env.SERVE_ROOT,
     environment: process.env.NODE_ENV,
     uploadDirectory: process.env.UPLOAD_DIRECTORY_PATH,
     port: parseInt(process.env.POR || DEFAULT_PORT.toString(), 10),
@@ -37,6 +39,7 @@ export default registerAs('application', (): FilesConfig => {
   };
 
   const validationSchema = Joi.object<FilesConfig>({
+    serveRoot: Joi.string().required(),
     environment: Joi.string().valid('development', 'production', 'stage'),
     port: Joi.number().port().default(DEFAULT_PORT),
     uploadDirectory: Joi.string(),

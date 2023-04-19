@@ -2,17 +2,24 @@ import 'multer';
 import {
   Controller,
   Get,
+  Inject,
   Param,
   Post,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
+import { ConfigType } from '@nestjs/config';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { FileService } from './file.service';
+import { filesConfig } from '@project/config/config-files';
 
 @Controller('files')
 export class FileController {
-  constructor(private readonly fileService: FileService) {}
+  constructor(
+    private readonly fileService: FileService,
+    @Inject(filesConfig.KEY)
+    private readonly applicationConfig: ConfigType<typeof filesConfig>
+  ) {}
 
   @Post('/upload')
   @UseInterceptors(FileInterceptor('file'))
