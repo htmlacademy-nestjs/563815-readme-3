@@ -1,6 +1,8 @@
 import 'multer';
 import {
   Controller,
+  Get,
+  Param,
   Post,
   UploadedFile,
   UseInterceptors,
@@ -15,6 +17,11 @@ export class FileController {
   @Post('/upload')
   @UseInterceptors(FileInterceptor('file'))
   public async uploadFile(@UploadedFile() file: Express.Multer.File) {
-    return this.fileService.writeFile(file);
+    return await this.fileService.saveFile(file);
+  }
+
+  @Get(':fileId')
+  public async show(@Param('fileId') fileId: string) {
+    return await this.fileService.getFile(fileId);
   }
 }
