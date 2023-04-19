@@ -6,6 +6,7 @@ import {
   HttpCode,
   HttpStatus,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
 } from '@nestjs/common';
@@ -17,29 +18,31 @@ export class PostController {
   constructor(private readonly postService: PostService) {}
 
   @Get('/:id')
-  async show(@Param('id') id: string) {
-    const postId = parseInt(id, 10);
-    this.postService.getPost(postId);
+  async show(@Param('id', ParseIntPipe) id: number) {
+    return this.postService.getPost(id);
   }
 
   @Get('/')
   async index() {
-    this.postService.getPosts();
+    return this.postService.getPosts();
   }
 
   @Post('/')
   async create(@Body() dto: NewBlogPostFromClient) {
-    this.postService.createPost(dto);
+    return this.postService.createPost(dto);
   }
 
   @Delete('/:id')
   @HttpCode(HttpStatus.NO_CONTENT)
-  async destroy(@Param('id') id: string) {
-    this.postService.deletePost(parseInt(id, 10));
+  async destroy(@Param('id', ParseIntPipe) id: number) {
+    return this.postService.deletePost(id);
   }
 
   @Patch('/:id')
-  async update(@Param('id') id: string, @Body() dto: NewBlogPostFromClient) {
-    this.postService.updatePost(parseInt(id, 10), dto);
+  async update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() dto: NewBlogPostFromClient
+  ) {
+    return this.postService.updatePost(id, dto);
   }
 }
