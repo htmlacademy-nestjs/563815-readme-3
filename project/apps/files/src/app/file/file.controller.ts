@@ -11,6 +11,7 @@ import {
 import { ConfigType } from '@nestjs/config';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { FileService } from './file.service';
+import { MongoidValidationPipe } from '@project/shared/shared-pipes';
 import { filesConfig } from '@project/config/config-files';
 
 @Controller('files')
@@ -28,7 +29,7 @@ export class FileController {
   }
 
   @Get(':fileId')
-  public async show(@Param('fileId') fileId: string) {
+  public async show(@Param('fileId', MongoidValidationPipe) fileId: string) {
     return await this.fileService.getFile(fileId);
   }
 }
