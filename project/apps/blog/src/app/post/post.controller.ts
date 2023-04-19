@@ -6,7 +6,6 @@ import {
   HttpCode,
   HttpStatus,
   Param,
-  ParseIntPipe,
   Patch,
   Post,
 } from '@nestjs/common';
@@ -18,7 +17,7 @@ export class PostController {
   constructor(private readonly postService: PostService) {}
 
   @Get('/:id')
-  async show(@Param('id', ParseIntPipe) id: number) {
+  async show(@Param('id') id: number) {
     return this.postService.getPost(id);
   }
 
@@ -34,15 +33,12 @@ export class PostController {
 
   @Delete('/:id')
   @HttpCode(HttpStatus.NO_CONTENT)
-  async destroy(@Param('id', ParseIntPipe) id: number) {
+  async destroy(@Param('id') id: number) {
     return this.postService.deletePost(id);
   }
 
   @Patch('/:id')
-  async update(
-    @Param('id', ParseIntPipe) id: number,
-    @Body() dto: NewBlogPostFromClient
-  ) {
+  async update(@Param('id') id: number, @Body() dto: NewBlogPostFromClient) {
     return this.postService.updatePost(id, dto);
   }
 }
