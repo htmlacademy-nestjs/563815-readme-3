@@ -1,13 +1,5 @@
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import {
-  Body,
-  Controller,
-  HttpCode,
-  HttpStatus,
-  Post,
-  UnauthorizedException,
-} from '@nestjs/common';
-import { ERROR_GENERIC_ERROR, SUCCESS_USER_CREATED } from './constants';
+import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
 import {
   NewPasswordFromClient,
   SuccessMessageRdoApiDescription,
@@ -15,6 +7,7 @@ import {
 } from '@project/shared/shared-types';
 import { AccessTokenRdo } from './rdo/access-token.rdo';
 import { AuthenticationService } from './authentication.service';
+import { SUCCESS_USER_CREATED } from './constants';
 
 @ApiTags('authentication')
 @Controller('auth')
@@ -45,13 +38,8 @@ export class AuthenticationController {
   @Post('login')
   @HttpCode(HttpStatus.OK)
   public async login(@Body() dto: UserFromClient) {
-    const isVerifiedUser = await this.authService.isVerifiedUser(dto);
-
-    if (!isVerifiedUser) {
-      return 'accessToken';
-    } else {
-      throw new UnauthorizedException(ERROR_GENERIC_ERROR);
-    }
+    const user = await this.authService.verifyUser(dto);
+    return await this.authService.createUserToken(user);
   }
 
   @ApiResponse({
