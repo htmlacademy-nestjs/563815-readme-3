@@ -117,4 +117,8 @@ export class AuthenticationService {
       accessToken: await this.jwtService.signAsync(payload),
     };
   }
+
+  public async getUser(id: string) {
+    return this.usersRepository.findById(id);
+  }
 }

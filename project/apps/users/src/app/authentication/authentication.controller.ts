@@ -1,5 +1,14 @@
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import {
   NewPasswordFromClient,
   SuccessMessageRdoApiDescription,
@@ -7,6 +16,8 @@ import {
 } from '@project/shared/shared-types';
 import { AccessTokenRdo } from './rdo/access-token.rdo';
 import { AuthenticationService } from './authentication.service';
+import { JwtAuthGuard } from './guards/jwt-auth.guard';
+import { MongoidValidationPipe } from '@project/shared/shared-pipes';
 import { SUCCESS_USER_CREATED } from './constants';
 
 @ApiTags('authentication')
@@ -55,5 +66,11 @@ export class AuthenticationController {
   @HttpCode(HttpStatus.OK)
   public async changePassword(@Body() dto: NewPasswordFromClient) {
     await this.authService.changePassword(dto);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get(':id')
+  public async show(@Param('id', MongoidValidationPipe) id: string) {
+    return await this.authService.getUser(id);
   }
 }
