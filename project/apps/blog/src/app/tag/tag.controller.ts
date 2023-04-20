@@ -6,8 +6,7 @@ export class TagController {
   constructor(private readonly tagService: TagService) {}
 
   @Get('/:id')
-  async show(@Param('id') id: string) {
-    const tagId = parseInt(id, 10);
-    this.tagService.getTag(tagId);
+  async show(@Param('id') id: number) {
+    return this.tagService.getTag(id);
   }
 }

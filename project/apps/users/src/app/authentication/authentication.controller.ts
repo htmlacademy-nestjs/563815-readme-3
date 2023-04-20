@@ -2,12 +2,13 @@ import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import {
   Body,
   Controller,
+  Get,
   HttpCode,
   HttpStatus,
+  Param,
   Post,
-  UnauthorizedException,
+  UseGuards,
 } from '@nestjs/common';
-import { ERROR_GENERIC_ERROR, SUCCESS_USER_CREATED } from './constants';
 import {
   NewPasswordFromClient,
   SuccessMessageRdoApiDescription,
@@ -15,6 +16,9 @@ import {
 } from '@project/shared/shared-types';
 import { AccessTokenRdo } from './rdo/access-token.rdo';
 import { AuthenticationService } from './authentication.service';
+import { JwtAuthGuard } from './guards/jwt-auth.guard';
+import { MongoidValidationPipe } from '@project/shared/shared-pipes';
+import { SUCCESS_USER_CREATED } from './constants';
 
 @ApiTags('authentication')
 @Controller('auth')
@@ -45,13 +49,8 @@ export class AuthenticationController {
   @Post('login')
   @HttpCode(HttpStatus.OK)
   public async login(@Body() dto: UserFromClient) {
-    const isVerifiedUser = await this.authService.isVerifiedUser(dto);
-
-    if (!isVerifiedUser) {
-      return 'accessToken';
-    } else {
-      throw new UnauthorizedException(ERROR_GENERIC_ERROR);
-    }
+    const user = await this.authService.verifyUser(dto);
+    return await this.authService.createUserToken(user);
   }
 
   @ApiResponse({
@@ -67,5 +66,11 @@ export class AuthenticationController {
   @HttpCode(HttpStatus.OK)
   public async changePassword(@Body() dto: NewPasswordFromClient) {
     await this.authService.changePassword(dto);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get(':id')
+  public async show(@Param('id', MongoidValidationPipe) id: string) {
+    return await this.authService.getUser(id);
   }
 }

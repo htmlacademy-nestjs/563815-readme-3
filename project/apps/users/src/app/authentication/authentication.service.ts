@@ -13,9 +13,11 @@ import {
 } from './constants';
 import {
   NewPasswordFromClient,
+  TokenPayload,
   UserFromClient,
+  UserToClient,
 } from '@project/shared/shared-types';
-import { ConfigType } from '@nestjs/config';
+import { JwtService } from '@nestjs/jwt';
 import { UsersRepository } from '../users/users.repository';
 import { compare } from 'bcrypt';
 import { dbConfig } from '@project/config/config-users';
@@ -26,7 +28,7 @@ export class AuthenticationService {
   constructor(
     private readonly usersRepository: UsersRepository,
     @Inject(dbConfig.KEY)
-    private readonly databaseConfig: ConfigType<typeof dbConfig>
+    private readonly jwtService: JwtService
   ) {}
 
   public async createNewUser(dto: UserFromClient) {
@@ -53,7 +55,7 @@ export class AuthenticationService {
     return this.usersRepository.create(userEntity);
   }
 
-  public async isVerifiedUser(dto: UserFromClient) {
+  public async verifyUser(dto: UserFromClient): Promise<UserToClient> {
     const { email, password } = dto;
     const existUser = await this.usersRepository.findByEmail(email);
 
@@ -67,7 +69,10 @@ export class AuthenticationService {
       throw new UnauthorizedException(ERROR_USER_PASSWORD_WRONG);
     }
 
-    return true;
+    return {
+      email: existUser.email,
+      name: existUser.name,
+    };
   }
 
   public async changePassword(data: NewPasswordFromClient) {
@@ -100,5 +105,20 @@ export class AuthenticationService {
     } else {
       throw new ConflictException(ERROR_USER_NOT_FOUND);
     }
+  }
+
+  public async createUserToken(user: UserToClient) {
+    const payload: TokenPayload = {
+      name: user.name,
+      email: user.email,
+    };
+
+    return {
+      accessToken: await this.jwtService.signAsync(payload),
+    };
+  }
+
+  public async getUser(id: string) {
+    return this.usersRepository.findById(id);
   }
 }

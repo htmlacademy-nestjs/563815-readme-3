@@ -4,6 +4,7 @@ import {
 } from '@project/shared/shared-types';
 import { CRUDRepository } from '@project/util/util-types';
 import { Injectable } from '@nestjs/common';
+import { PostQuery } from './post.query';
 import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
@@ -50,12 +51,24 @@ export class PostRepository
     });
   }
 
-  public find() {
+  public find({ limit, tags, sortDirection, page }: PostQuery) {
     return this.prisma.databasePost.findMany({
+      where: {
+        tags: {
+          some: {
+            id: {
+              in: tags,
+            },
+          },
+        },
+      },
+      take: limit,
       include: {
         comments: true,
         tags: true,
       },
+      orderBy: [{ createdAt: sortDirection }],
+      skip: page > 0 ? limit * (page - 1) : undefined,
     });
   }
 
