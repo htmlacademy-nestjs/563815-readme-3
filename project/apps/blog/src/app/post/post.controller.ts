@@ -8,8 +8,10 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import { NewBlogPostFromClient } from '@project/shared/shared-types';
+import { PostQuery } from './post.query';
 import { PostService } from './post.service';
 
 @Controller('posts')
@@ -22,8 +24,8 @@ export class PostController {
   }
 
   @Get('/')
-  async index() {
-    return this.postService.getPosts();
+  async index(@Query() query: PostQuery) {
+    return this.postService.getPosts(query);
   }
 
   @Post('/')

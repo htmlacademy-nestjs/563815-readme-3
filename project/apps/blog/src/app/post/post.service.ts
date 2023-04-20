@@ -4,6 +4,7 @@ import {
 } from '@project/shared/shared-types';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { ERROR_POST_NOT_FOUND } from './constants';
+import { PostQuery } from './post.query';
 import { PostRepository } from './post.repository';
 
 @Injectable()
@@ -34,8 +35,8 @@ export class PostService {
     }
   }
 
-  async getPosts(): Promise<BlogPostToClient[]> {
-    return this.postRepository.find();
+  async getPosts(query: PostQuery): Promise<BlogPostToClient[]> {
+    return this.postRepository.find(query);
   }
 
   async updatePost(id: number, dto: NewBlogPostFromClient): Promise<void> {

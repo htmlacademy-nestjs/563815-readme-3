@@ -13,7 +13,7 @@ export class PostQuery {
   )
   @IsArray({})
   @IsOptional()
-  public categories?: number[];
+  public tags?: number[];
 
   @IsIn(['asc', 'desc'])
   @IsOptional()
