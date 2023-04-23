@@ -9,7 +9,7 @@ import { getMongooseOptions } from '@project/util/util-core';
   imports: [
     AuthenticationModule,
     ConfigUsersModule,
-    MongooseModule.forRootAsync(getMongooseOptions('users')),
+    MongooseModule.forRootAsync(getMongooseOptions('db')),
     NotifyModule,
   ],
   controllers: [],

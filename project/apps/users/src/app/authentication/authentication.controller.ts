@@ -34,7 +34,7 @@ export class AuthenticationController {
     status: HttpStatus.CREATED,
     description: 'The new user has been successfully created.',
   })
-  @Post('new-user')
+  @Post('new')
   public async createNewUser(@Body() dto: UserFromClient) {
     await this.authService.createNewUser(dto);
     const { email, name } = dto;
