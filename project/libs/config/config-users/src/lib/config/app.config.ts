@@ -8,7 +8,7 @@ export interface ApplicationConfig {
   port: number;
 }
 
-export default registerAs('application', (): ApplicationConfig => {
+export default registerAs('users', (): ApplicationConfig => {
   const config: ApplicationConfig = {
     environment: process.env.NODE_ENV,
     port: parseInt(process.env.PORT || DEFAULT_PORT.toString(), 10),

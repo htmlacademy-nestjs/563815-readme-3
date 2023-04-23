@@ -19,7 +19,7 @@ export interface FilesConfig {
   };
 }
 
-export default registerAs('application', (): FilesConfig => {
+export default registerAs('files', (): FilesConfig => {
   const config: FilesConfig = {
     serveRoot: process.env.SERVE_ROOT,
     environment: process.env.NODE_ENV,
