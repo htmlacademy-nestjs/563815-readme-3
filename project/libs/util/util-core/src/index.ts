@@ -3,6 +3,7 @@ import { genSalt, hash } from 'bcrypt';
 
 export { getMongooseOptions } from './db';
 export { getRabbitMQOptions } from './brokers';
+export { getMailerAsyncOptions } from './mail';
 
 export function fillObject<T, V>(someDto: ClassConstructor<T>, plainObject: V) {
   return plainToInstance(someDto, plainObject, {

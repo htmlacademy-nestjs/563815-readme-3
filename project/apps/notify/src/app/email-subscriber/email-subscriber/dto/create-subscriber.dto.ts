@@ -1,8 +1,4 @@
-import {
-  EMAIL_NOT_VALID,
-  NAME_IS_EMPTY,
-  USER_ID_IS_EMPTY,
-} from '../email-subscriber.constant';
+import { EMAIL_NOT_VALID, NAME_IS_EMPTY } from '../email-subscriber.constant';
 import { IsEmail, IsNotEmpty } from 'class-validator';
 
 export class CreateSubscriberDto {
