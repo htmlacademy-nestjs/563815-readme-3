@@ -18,12 +18,16 @@ import { AccessTokenRdo } from './rdo/access-token.rdo';
 import { AuthenticationService } from './authentication.service';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { MongoidValidationPipe } from '@project/shared/shared-pipes';
+import { NotifyService } from '../notify/notify.service';
 import { SUCCESS_USER_CREATED } from './constants';
 
 @ApiTags('authentication')
 @Controller('auth')
 export class AuthenticationController {
-  constructor(private readonly authService: AuthenticationService) {}
+  constructor(
+    private readonly authService: AuthenticationService,
+    private readonly notifyService: NotifyService
+  ) {}
 
   @ApiResponse({
     type: SuccessMessageRdoApiDescription,
@@ -33,6 +37,8 @@ export class AuthenticationController {
   @Post('new-user')
   public async createNewUser(@Body() dto: UserFromClient) {
     await this.authService.createNewUser(dto);
+    const { email, name } = dto;
+    await this.notifyService.registerSubscriber({ email, name });
 
     return SUCCESS_USER_CREATED;
   }

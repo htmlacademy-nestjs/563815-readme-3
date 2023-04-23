@@ -22,7 +22,7 @@ export interface NotifyConfig {
     password?: string;
     user?: string;
     queue?: string;
-    exchange?: string;
+    exchange: string;
     port?: number;
   };
   mail: {
@@ -58,7 +58,7 @@ export default registerAs('application', (): NotifyConfig => {
       ),
       user: process.env.RABBIT_USER,
       queue: process.env.RABBIT_QUEUE,
-      exchange: process.env.RABBIT_EXCHANGE,
+      exchange: process.env.RABBIT_EXCHANGE || 'readme.notify',
     },
     mail: {
       host: process.env.MAIL_SMTP_HOST,
