@@ -38,6 +38,11 @@ export class PostController {
     return this.postService.createPost(dto);
   }
 
+  @Post('/repost')
+  async repost(@Body() dto: NewBlogPostFromClient) {
+    return this.postService.repost(dto);
+  }
+
   @Delete('/:id')
   @HttpCode(HttpStatus.NO_CONTENT)
   async destroy(@Param('id') id: number) {
