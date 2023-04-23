@@ -8,7 +8,7 @@ import { getMongooseOptions } from '@project/util/util-core';
   imports: [
     FileModule,
     ConfigFilesModule,
-    MongooseModule.forRootAsync(getMongooseOptions('files')),
+    MongooseModule.forRootAsync(getMongooseOptions('files.db')),
   ],
   controllers: [],
   providers: [],
