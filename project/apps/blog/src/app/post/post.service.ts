@@ -1,9 +1,7 @@
-import {
-  BlogPostToClient,
-  NewBlogPostFromClient,
-} from '@project/shared/shared-types';
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { BlogPostToClient } from '@project/shared/shared-types';
 import { ERROR_POST_NOT_FOUND } from './constants';
+import { NewBlogPostFromClient } from './dto/new-blog-post-from-client.dto';
 import { PostQuery } from './post.query';
 import { PostRepository } from './post.repository';
 

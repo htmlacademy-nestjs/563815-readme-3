@@ -1,9 +1,7 @@
-import {
-  BlogPostToClient,
-  NewBlogPostFromClient,
-} from '@project/shared/shared-types';
+import { BlogPostToClient } from '@project/shared/shared-types';
 import { CRUDRepository } from '@project/util/util-types';
 import { Injectable } from '@nestjs/common';
+import { NewBlogPostFromClient } from './dto/new-blog-post-from-client.dto';
 import { PostQuery } from './post.query';
 import { PrismaService } from '../prisma/prisma.service';
 
