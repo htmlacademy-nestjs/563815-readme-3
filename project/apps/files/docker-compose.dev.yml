@@ -27,7 +27,7 @@ services:
     restart: always
     container_name: readme.files.mongo.ui
     ports:
-      - 8083:8081
+      - 8082:8081
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: admin
       ME_CONFIG_MONGODB_ADMINPASSWORD: test

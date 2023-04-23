@@ -5,7 +5,15 @@
   "scripts": {
     "lint:ts": "nx run-many --all --target=lint",
     "format:write": "nx format:write",
-    "tsc": "tsc -p tsconfig.base.json --noEmit --skipLibCheck"
+    "tsc": "tsc -p tsconfig.base.json --noEmit --skipLibCheck",
+    "run:blog": "nx run blog:serve",
+    "run:blog:docker": "docker-compose -f apps/blog/docker-compose.dev.yml --project-name blog up",
+    "run:files": "nx run files:serve",
+    "run:files:docker": "docker-compose -f apps/files/docker-compose.dev.yml --project-name files up",
+    "run:notify": "nx run notify:serve",
+    "run:notify:docker": "docker-compose -f apps/notify/docker-compose.dev.yml --project-name notify up",
+    "run:users": "nx run users:serve",
+    "run:users:docker": "docker-compose -f apps/users/docker-compose.dev.yml --project-name users up"
   },
   "private": true,
   "dependencies": {

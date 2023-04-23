@@ -31,7 +31,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: test
       MONGO_INITDB_DATABASE: readme-notify
     ports:
-      - 27020:27017
+      - 27019:27017
     volumes:
       - readme.notify.mongodb:/data/db
     healthcheck:
