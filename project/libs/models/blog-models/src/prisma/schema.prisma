@@ -72,6 +72,7 @@ model DatabaseLike {
   postId    Int            @map("post_id")
   createdAt DateTime       @default(now()) @map("created_at")
 
+  @@unique([userId, postId])
   @@map("likes")
 }
 
