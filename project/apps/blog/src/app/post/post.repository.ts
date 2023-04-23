@@ -61,6 +61,7 @@ export class PostRepository
             },
           },
         },
+        status: 'published',
       },
       take: limit,
       include: {
@@ -86,6 +87,7 @@ export class PostRepository
             },
           },
         },
+        status: 'published',
       },
       take: limit,
       include: {
