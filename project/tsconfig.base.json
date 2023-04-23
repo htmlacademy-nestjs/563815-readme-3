@@ -12,6 +12,7 @@
     "moduleResolution": "node",
     "noEmit": true,
     "paths": {
+      "@project/config/config-blog": ["libs/config/config-blog/src/index.ts"],
       "@project/config/config-files": ["libs/config/config-files/src/index.ts"],
       "@project/config/config-notify": [
         "libs/config/config-notify/src/index.ts"

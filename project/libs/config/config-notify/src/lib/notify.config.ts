@@ -59,11 +59,13 @@ export default registerAs('notify', (): NotifyConfig => {
   };
 
   const validationSchema = Joi.object<NotifyConfig>({
-    environment: Joi.string().valid('development', 'production', 'stage'),
-    port: Joi.number().port(),
+    environment: Joi.string()
+      .valid('development', 'production', 'stage')
+      .required(),
+    port: Joi.number().port().required(),
     db: Joi.object({
-      host: Joi.string().valid().hostname(),
-      port: Joi.number().port(),
+      host: Joi.string().valid().hostname().required(),
+      port: Joi.number().port().required(),
       name: Joi.string().required(),
       user: Joi.string().required(),
       password: Joi.string().required(),
@@ -72,14 +74,14 @@ export default registerAs('notify', (): NotifyConfig => {
     rabbit: Joi.object({
       host: Joi.string().valid().hostname().required(),
       password: Joi.string().required(),
-      port: Joi.number().port(),
+      port: Joi.number().port().required(),
       user: Joi.string().required(),
       queue: Joi.string().required(),
       exchange: Joi.string().required(),
     }),
     mail: Joi.object({
       host: Joi.string().valid().hostname().required(),
-      port: Joi.number().port(),
+      port: Joi.number().port().required(),
       user: Joi.string().required(),
       password: Joi.string().required(),
       from: Joi.string().required(),

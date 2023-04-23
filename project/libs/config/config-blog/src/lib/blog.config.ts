@@ -1,18 +1,18 @@
 import * as Joi from 'joi';
 import { registerAs } from '@nestjs/config';
 
-export interface ApplicationConfig {
+export interface BlogConfig {
   environment?: string;
   port?: string;
 }
 
-export default registerAs('users', (): ApplicationConfig => {
-  const config: ApplicationConfig = {
+export default registerAs('blog', (): BlogConfig => {
+  const config: BlogConfig = {
     environment: process.env.NODE_ENV,
     port: process.env.PORT,
   };
 
-  const validationSchema = Joi.object<ApplicationConfig>({
+  const validationSchema = Joi.object<BlogConfig>({
     environment: Joi.string()
       .valid('development', 'production', 'stage')
       .required(),
@@ -23,8 +23,8 @@ export default registerAs('users', (): ApplicationConfig => {
 
   if (error) {
     throw new Error(
-      `[Application Config]: Environments validation failed. Please check .env file.
-      Error message: Mongo.${error.message}`
+      `[Files Config]: Environments validation failed. Please check .env file.
+       Error message: ${error.message}`
     );
   }
 

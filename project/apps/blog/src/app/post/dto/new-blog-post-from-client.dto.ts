@@ -41,8 +41,8 @@ export class NewBlogPostFromClient
 
   @ApiProperty({
     description: 'Post type',
-    type: PostTypeEnum,
-    example: 'video',
+    enum: PostTypeEnum,
+    example: 'quote',
     required: true,
   })
   @IsNotEmpty({ message: ERROR_POST_TYPE_IS_EMPTY })
@@ -53,7 +53,7 @@ export class NewBlogPostFromClient
 
   @ApiProperty({
     description: 'Post status',
-    type: PostStatusEnum,
+    enum: PostStatusEnum,
     example: 'published',
     required: true,
   })

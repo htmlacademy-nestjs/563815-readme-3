@@ -23,7 +23,7 @@ export default registerAs('rabbit', (): RabbitConfig => {
   const validationSchema = Joi.object<RabbitConfig>({
     host: Joi.string().valid().hostname().required(),
     password: Joi.string().required(),
-    port: Joi.number().port(),
+    port: Joi.number().port().required(),
     user: Joi.string().required(),
     queue: Joi.string().required(),
     exchange: Joi.string().required(),

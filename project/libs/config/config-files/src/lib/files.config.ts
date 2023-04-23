@@ -34,12 +34,14 @@ export default registerAs('files', (): FilesConfig => {
 
   const validationSchema = Joi.object<FilesConfig>({
     serveRoot: Joi.string().required(),
-    environment: Joi.string().valid('development', 'production', 'stage'),
-    port: Joi.number().port(),
-    uploadDirectory: Joi.string(),
+    environment: Joi.string()
+      .valid('development', 'production', 'stage')
+      .required(),
+    port: Joi.number().port().required(),
+    uploadDirectory: Joi.string().required(),
     db: Joi.object({
-      host: Joi.string().valid().hostname(),
-      port: Joi.number().port(),
+      host: Joi.string().valid().hostname().required(),
+      port: Joi.number().port().required(),
       name: Joi.string().required(),
       user: Joi.string().required(),
       password: Joi.string().required(),

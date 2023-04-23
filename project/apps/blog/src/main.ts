@@ -1,6 +1,7 @@
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app/app.module';
+import { BlogConfig } from '@project/config/config-blog';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 
@@ -16,27 +17,32 @@ async function bootstrap() {
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
 
-  const configService = app.get(ConfigService);
-
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('spec', app, document);
 
+  SwaggerModule.setup('spec', app, document);
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
     })
   );
 
-  const port = configService.get('application.port');
+  const configService = app.get(ConfigService);
+  const blogAppConfig = configService.get<BlogConfig>('blog');
 
-  await app.listen(port);
+  if (!blogAppConfig) {
+    throw new Error('Blog config not found');
+  }
+
+  if (!blogAppConfig.port) {
+    throw new Error('Blog config port not found');
+  }
+
+  await app.listen(blogAppConfig.port);
 
   Logger.log(
-    `🚀 Application is running on: http://localhost:${port}/${globalPrefix}`
+    `🚀 Application is running on: http://localhost:${blogAppConfig.port}/${globalPrefix}`
   );
-  Logger.log(
-    `🎯  Current mode: ${configService.get('application.environment')}`
-  );
+  Logger.log(`🎯  Current mode: ${blogAppConfig.environment}`);
 }
 
 bootstrap();
