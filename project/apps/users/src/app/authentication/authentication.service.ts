@@ -18,7 +18,7 @@ import {
   UserToClient,
 } from '@project/shared/shared-types';
 import { JwtService } from '@nestjs/jwt';
-import { UsersRepository } from '../users/users.repository';
+import { UsersRepository } from './users.repository';
 import { compare } from 'bcrypt';
 import { dbConfig } from '@project/config/config-users';
 import { generatePassword } from '@project/util/util-core';

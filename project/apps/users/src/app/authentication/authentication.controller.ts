@@ -69,6 +69,7 @@ export class AuthenticationController {
     description: 'Old password wrong.',
   })
   @Post('change-password')
+  @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.OK)
   public async changePassword(@Body() dto: NewPasswordFromClient) {
     await this.authService.changePassword(dto);

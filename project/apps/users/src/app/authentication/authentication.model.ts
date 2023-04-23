@@ -6,7 +6,7 @@ import { Document } from 'mongoose';
   collection: 'users',
   timestamps: true,
 })
-export class UserDbModel extends Document implements DatabaseUser {
+export class AuthenticationModel extends Document implements DatabaseUser {
   @Prop()
   public name: string;
 
@@ -29,4 +29,5 @@ export class UserDbModel extends Document implements DatabaseUser {
   }
 }
 
-export const UserDbModelSchema = SchemaFactory.createForClass(UserDbModel);
+export const UserDbModelSchema =
+  SchemaFactory.createForClass(AuthenticationModel);
