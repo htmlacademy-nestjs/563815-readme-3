@@ -8,8 +8,4 @@ export class TagService {
   async getTag(id: number) {
     return this.tagRepository.findById(id);
   }
-
-  async getTags() {
-    return this.tagRepository.find();
-  }
 }

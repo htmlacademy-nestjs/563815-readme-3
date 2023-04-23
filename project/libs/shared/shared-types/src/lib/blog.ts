@@ -1,12 +1,5 @@
-import {
-  DatabasePost,
-  DatabasePostStatus,
-  DatabasePostType,
-  DatabaseTag,
-} from '@prisma/client';
+import { DatabasePost, DatabaseTag } from '@prisma/client';
 
-export type PostType = DatabasePostType;
-export type PostStatus = DatabasePostStatus;
 export type BlogPostToClient = DatabasePost;
 export type BlogTagToClient = DatabaseTag;
 
@@ -21,4 +14,9 @@ export type NewBlogPostFromClient = Pick<
   | 'type'
 > & {
   tags: DatabaseTag[];
+};
+
+export type LikeFromClient = {
+  postId: number;
+  userId: number;
 };
