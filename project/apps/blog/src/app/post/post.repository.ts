@@ -72,6 +72,31 @@ export class PostRepository
     });
   }
 
+  public async findByUser(
+    userId: number,
+    { limit, tags, sortDirection, page }: PostQuery
+  ) {
+    return this.prisma.databasePost.findMany({
+      where: {
+        authorId: userId,
+        tags: {
+          some: {
+            id: {
+              in: tags,
+            },
+          },
+        },
+      },
+      take: limit,
+      include: {
+        comments: true,
+        tags: true,
+      },
+      orderBy: [{ createdAt: sortDirection }],
+      skip: page > 0 ? limit * (page - 1) : undefined,
+    });
+  }
+
   public async update(id: number, post: NewBlogPostFromClient): Promise<void> {
     this.prisma.databasePost.update({
       where: {

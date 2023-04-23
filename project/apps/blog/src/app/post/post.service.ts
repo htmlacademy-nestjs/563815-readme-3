@@ -39,6 +39,13 @@ export class PostService {
     return this.postRepository.find(query);
   }
 
+  async getPostsByUser(
+    userId: number,
+    query: PostQuery
+  ): Promise<BlogPostToClient[]> {
+    return this.postRepository.findByUser(userId, query);
+  }
+
   async updatePost(id: number, dto: NewBlogPostFromClient): Promise<void> {
     const post = await this.postRepository.findById(id);
 
