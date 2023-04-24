@@ -3,7 +3,15 @@ import {
   DEFAULT_SORT_DIRECTION,
   DEFAULT_SORT_TYPE,
 } from './constants';
-import { IsArray, IsIn, IsNumber, IsOptional } from 'class-validator';
+import {
+  IsArray,
+  IsDefined,
+  IsIn,
+  IsNumber,
+  IsObject,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 import { SortTypeEnum } from '@project/shared/shared-types';
 import { Transform } from 'class-transformer';
 
@@ -20,16 +28,21 @@ export class PostQuery {
   @IsOptional()
   public tags?: number[];
 
+  @IsOptional()
+  @IsString()
+  public searchQuery?: string;
+
   @IsIn(Object.keys(SortTypeEnum))
   @IsOptional()
   public sortType: string = DEFAULT_SORT_TYPE;
 
   @IsIn(['asc', 'desc'])
   @IsOptional()
+  @IsObject()
   public sortDirection: 'desc' | 'asc' = DEFAULT_SORT_DIRECTION;
 
+  @IsDefined()
   @Transform(({ value }) => +value)
-  @IsOptional()
   public page: number;
 
   constructor() {

@@ -67,7 +67,7 @@ export const quotePostMock: DatabasePost = {
   text: "Life is like a box of chocolates. You never know what you're gonna get.",
   quoteAuthor: 'Forrest Gump',
 
-  title: null,
+  title: 'About the quote DatabasePost and how to make it',
   announcement: null,
   externalUrl: null,
 };
@@ -88,7 +88,7 @@ export const photoPostMock: DatabasePost = {
   originalAuthorId: 1,
   originalPostId: 2,
 
-  title: null,
+  title: 'About the photo DatabasePost and how to make it',
   announcement: null,
   quoteAuthor: null,
   text: null,
@@ -111,7 +111,7 @@ export const linkPostMock: DatabasePost = {
   originalAuthorId: 1,
   originalPostId: 2,
 
-  title: null,
+  title: 'About the link DatabasePost and how to make it',
   quoteAuthor: null,
   text: null,
 };

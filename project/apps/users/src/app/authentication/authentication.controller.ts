@@ -75,6 +75,10 @@ export class AuthenticationController {
     await this.authService.changePassword(dto);
   }
 
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Get user',
+  })
   @UseGuards(JwtAuthGuard)
   @Get(':id')
   public async show(@Param('id', MongoidValidationPipe) id: string) {

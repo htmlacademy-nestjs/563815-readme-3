@@ -5,7 +5,7 @@ import { TagRepository } from './tag.repository';
 export class TagService {
   constructor(private readonly tagRepository: TagRepository) {}
 
-  async getTag(id: number) {
-    return this.tagRepository.findById(id);
+  async getTag() {
+    return this.tagRepository.findAll();
   }
 }
