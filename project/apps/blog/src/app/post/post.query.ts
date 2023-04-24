@@ -10,6 +10,7 @@ import {
   IsNumber,
   IsObject,
   IsOptional,
+  IsString,
 } from 'class-validator';
 import { SortTypeEnum } from '@project/shared/shared-types';
 import { Transform } from 'class-transformer';
@@ -26,6 +27,10 @@ export class PostQuery {
   @IsArray({})
   @IsOptional()
   public tags?: number[];
+
+  @IsOptional()
+  @IsString()
+  public searchQuery?: string;
 
   @IsIn(Object.keys(SortTypeEnum))
   @IsOptional()

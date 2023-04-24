@@ -7,8 +7,7 @@ import { PostRepository } from './post.repository';
 
 @Injectable()
 export class PostService {
-  constructor(private readonly postRepository: PostRepository) {
-  }
+  constructor(private readonly postRepository: PostRepository) {}
 
   async createPost(dto: NewBlogPostFromClient): Promise<void> {
     this.postRepository.create(dto);

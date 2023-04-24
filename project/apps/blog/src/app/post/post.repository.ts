@@ -49,9 +49,21 @@ export class PostRepository
     });
   }
 
-  public find({ limit, tags, sortDirection, page }: PostQuery) {
+  public find({
+    limit,
+    tags,
+    sortDirection,
+    page,
+    searchQuery,
+    sortType,
+  }: PostQuery) {
     return this.prisma.databasePost.findMany({
       where: {
+        ...(searchQuery && {
+          title: {
+            search: searchQuery,
+          },
+        }),
         tags: {
           some: {
             id: {
@@ -66,7 +78,7 @@ export class PostRepository
         comments: true,
         tags: true,
       },
-      orderBy: [{ createdAt: sortDirection }],
+      orderBy: [{ [sortType]: sortDirection }],
       skip: page > 0 ? limit * (page - 1) : undefined,
     });
   }
