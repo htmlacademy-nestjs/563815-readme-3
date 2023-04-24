@@ -1,8 +1,10 @@
 import {
   ArrayMaxSize,
   IsBoolean,
+  IsEnum,
   IsIn,
   IsNotEmpty,
+  IsObject,
   IsOptional,
   IsString,
 } from 'class-validator';
@@ -49,6 +51,7 @@ export class NewBlogPostFromClient
   @IsIn(Object.values(PostTypeEnum), {
     message: ERROR_POST_TYPE_IS_WRONG_TYPE,
   })
+  @IsEnum(PostTypeEnum)
   type: PostType;
 
   @ApiProperty({
@@ -61,6 +64,7 @@ export class NewBlogPostFromClient
   @IsIn(Object.values(PostStatusEnum), {
     message: ERROR_POST_STATUS_IS_WRONG_TYPE,
   })
+  @IsEnum(PostStatusEnum)
   status: PostStatus;
 
   @ApiProperty({
@@ -146,6 +150,7 @@ export class NewBlogPostFromClient
     ],
   })
   @ArrayMaxSize(TAGS_COUNT_MAX, { message: ERROR_POST_TAGS_COUNT_IS_WRONG })
+  @IsObject()
   tags: BlogTagToClient[];
 
   constructor(data: NewBlogPostFromClient) {

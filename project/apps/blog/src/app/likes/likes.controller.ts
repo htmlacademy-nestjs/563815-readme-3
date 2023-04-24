@@ -1,3 +1,4 @@
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import {
   Body,
   Controller,
@@ -10,16 +11,24 @@ import {
 import { LikeFromClient } from '@project/shared/shared-types';
 import { LikesService } from './likes.service';
 
-@Controller('tags')
-export class TagController {
+@ApiTags('likes')
+@Controller('likes')
+export class LikesController {
   constructor(private readonly likesService: LikesService) {}
 
+  @ApiResponse({
+    status: HttpStatus.CREATED,
+    description: 'Create like',
+  })
   @Post('/')
   async create(@Body() dto: LikeFromClient) {
     return this.likesService.create(dto);
   }
 
-  // TODO: Check user permissions
+  @ApiResponse({
+    status: HttpStatus.NO_CONTENT,
+    description: 'Delete like',
+  })
   @Delete('/:id')
   @HttpCode(HttpStatus.NO_CONTENT)
   async destroy(@Param('id') id: number) {
