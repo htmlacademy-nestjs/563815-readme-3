@@ -1,9 +1,7 @@
-import {
-  BlogPostToClient,
-  NewBlogPostFromClient,
-} from '@project/shared/shared-types';
+import { BlogPostToClient } from '@project/shared/shared-types';
 import { CRUDRepository } from '@project/util/util-types';
 import { Injectable } from '@nestjs/common';
+import { NewBlogPostFromClient } from './dto/new-blog-post-from-client.dto';
 import { PostQuery } from './post.query';
 import { PrismaService } from '../prisma/prisma.service';
 
@@ -61,6 +59,33 @@ export class PostRepository
             },
           },
         },
+        status: 'published',
+      },
+      take: limit,
+      include: {
+        comments: true,
+        tags: true,
+      },
+      orderBy: [{ createdAt: sortDirection }],
+      skip: page > 0 ? limit * (page - 1) : undefined,
+    });
+  }
+
+  public async findByUser(
+    userId: number,
+    { limit, tags, sortDirection, page }: PostQuery
+  ) {
+    return this.prisma.databasePost.findMany({
+      where: {
+        authorId: userId,
+        tags: {
+          some: {
+            id: {
+              in: tags,
+            },
+          },
+        },
+        status: 'published',
       },
       take: limit,
       include: {

@@ -1,3 +1,2 @@
 export * from './lib/config-config-files.module';
-export { default as filesConfig } from './lib/files.config';
-export * from './lib/files-mongoose.config';
+export { default as filesConfig, FilesConfig } from './lib/files.config';

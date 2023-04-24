@@ -1,30 +1,35 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "strict": true,
-    "noEmit": true,
-    "rootDir": ".",
-    "sourceMap": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
     "declaration": false,
-    "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "target": "es2015",
-    "module": "esnext",
     "lib": ["es2017", "dom"],
-    "skipLibCheck": true,
-    "skipDefaultLibCheck": true,
-    "baseUrl": ".",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "noEmit": true,
     "paths": {
+      "@project/config/config-blog": ["libs/config/config-blog/src/index.ts"],
       "@project/config/config-files": ["libs/config/config-files/src/index.ts"],
+      "@project/config/config-notify": [
+        "libs/config/config-notify/src/index.ts"
+      ],
       "@project/config/config-users": ["libs/config/config-users/src/index.ts"],
       "@project/models/blog-models": ["libs/models/blog-models/src/index.ts"],
       "@project/shared/shared-pipes": ["libs/shared/shared-pipes/src/index.ts"],
       "@project/shared/shared-types": ["libs/shared/shared-types/src/index.ts"],
       "@project/util/util-core": ["libs/util/util-core/src/index.ts"],
       "@project/util/util-types": ["libs/util/util-types/src/index.ts"]
-    }
+    },
+    "rootDir": ".",
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+    "target": "es2015"
   },
   "exclude": ["node_modules", "tmp"]
 }

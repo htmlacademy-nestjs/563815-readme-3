@@ -10,7 +10,7 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
-import { NewBlogPostFromClient } from '@project/shared/shared-types';
+import { NewBlogPostFromClient } from './dto/new-blog-post-from-client.dto';
 import { PostQuery } from './post.query';
 import { PostService } from './post.service';
 
@@ -18,19 +18,29 @@ import { PostService } from './post.service';
 export class PostController {
   constructor(private readonly postService: PostService) {}
 
-  @Get('/:id')
-  async show(@Param('id') id: number) {
-    return this.postService.getPost(id);
-  }
-
   @Get('/')
   async index(@Query() query: PostQuery) {
     return this.postService.getPosts(query);
   }
 
+  @Get('/:id')
+  async show(@Param('id') id: number) {
+    return this.postService.getPost(id);
+  }
+
+  @Get('/:user')
+  async showByUser(@Param('user') id: number, @Query() query: PostQuery) {
+    return this.postService.getPostsByUser(id, query);
+  }
+
   @Post('/')
   async create(@Body() dto: NewBlogPostFromClient) {
     return this.postService.createPost(dto);
+  }
+
+  @Post('/repost')
+  async repost(@Body() dto: NewBlogPostFromClient) {
+    return this.postService.repost(dto);
   }
 
   @Delete('/:id')

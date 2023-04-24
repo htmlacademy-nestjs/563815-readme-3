@@ -1,24 +1,22 @@
 import * as Joi from 'joi';
 import { registerAs } from '@nestjs/config';
 
-const DEFAULT_PORT = 3000;
-
 export interface ApplicationConfig {
   environment?: string;
-  port: number;
+  port?: string;
 }
 
-export default registerAs('application', (): ApplicationConfig => {
+export default registerAs('users', (): ApplicationConfig => {
   const config: ApplicationConfig = {
     environment: process.env.NODE_ENV,
-    port: parseInt(process.env.PORT || DEFAULT_PORT.toString(), 10),
+    port: process.env.PORT,
   };
 
   const validationSchema = Joi.object<ApplicationConfig>({
     environment: Joi.string()
       .valid('development', 'production', 'stage')
       .required(),
-    port: Joi.number().port().default(DEFAULT_PORT),
+    port: Joi.number().port().required(),
   });
 
   const { error } = validationSchema.validate(config, { abortEarly: true });
@@ -26,7 +24,7 @@ export default registerAs('application', (): ApplicationConfig => {
   if (error) {
     throw new Error(
       `[Application Config]: Environments validation failed. Please check .env file.
-      Error message: Mongo.${error.message}`
+      Error message: ${error.message}`
     );
   }
 

@@ -1,17 +1,17 @@
 import { UserFromClient, UserToClient } from '@project/shared/shared-types';
+import { AuthenticationModel } from './authentication.model';
 import { CRUDRepository } from '@project/util/util-types';
 import { InjectModel } from '@nestjs/mongoose';
 import { Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
-import { UserDbModel } from './user.db-model';
 
 @Injectable()
 export class UsersRepository
   implements CRUDRepository<UserFromClient, UserToClient, string>
 {
   constructor(
-    @InjectModel(UserDbModel.name)
-    private readonly userDbModel: Model<UserDbModel>
+    @InjectModel(AuthenticationModel.name)
+    private readonly userDbModel: Model<AuthenticationModel>
   ) {}
 
   public async create(item: Omit<UserFromClient, 'password'>) {

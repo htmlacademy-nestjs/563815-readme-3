@@ -10,7 +10,7 @@ export type UserFromClient = {
   password: string;
 
   // Registration only
-  name?: string;
+  name: string;
   passwordConfirmation?: string;
 };
 

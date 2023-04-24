@@ -1,17 +1,20 @@
-import {
-  BlogPostToClient,
-  NewBlogPostFromClient,
-} from '@project/shared/shared-types';
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { BlogPostToClient } from '@project/shared/shared-types';
 import { ERROR_POST_NOT_FOUND } from './constants';
+import { NewBlogPostFromClient } from './dto/new-blog-post-from-client.dto';
 import { PostQuery } from './post.query';
 import { PostRepository } from './post.repository';
 
 @Injectable()
 export class PostService {
-  constructor(private readonly postRepository: PostRepository) {}
+  constructor(private readonly postRepository: PostRepository) {
+  }
 
   async createPost(dto: NewBlogPostFromClient): Promise<void> {
+    this.postRepository.create(dto);
+  }
+
+  async repost(dto: NewBlogPostFromClient): Promise<void> {
     this.postRepository.create(dto);
   }
 
@@ -37,6 +40,13 @@ export class PostService {
 
   async getPosts(query: PostQuery): Promise<BlogPostToClient[]> {
     return this.postRepository.find(query);
+  }
+
+  async getPostsByUser(
+    userId: number,
+    query: PostQuery
+  ): Promise<BlogPostToClient[]> {
+    return this.postRepository.findByUser(userId, query);
   }
 
   async updatePost(id: number, dto: NewBlogPostFromClient): Promise<void> {

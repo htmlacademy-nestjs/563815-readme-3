@@ -30,6 +30,7 @@ model DatabasePost {
   announcement     String?            @default("")
   type             DatabasePostType   @default(text)
   externalUrl      String?            @map("external_url")
+  DatabaseLike     DatabaseLike[]
 
   @@map("posts")
 }
@@ -47,6 +48,7 @@ model DatabaseAuthor {
   name          String         @default("")
   allPosts      DatabasePost[] @relation(name: "author")
   originalPosts DatabasePost[] @relation(name: "original_author")
+  DatabaseLike  DatabaseLike[]
 
   @@map("authors")
 }
@@ -60,6 +62,18 @@ model DatabaseComment {
   updatedAt DateTime       @updatedAt @map("updated_at")
 
   @@map("comments")
+}
+
+model DatabaseLike {
+  id        Int            @id @default(autoincrement())
+  user      DatabaseAuthor @relation(fields: [userId], references: [id])
+  userId    Int            @map("user_id")
+  post      DatabasePost   @relation(fields: [postId], references: [id])
+  postId    Int            @map("post_id")
+  createdAt DateTime       @default(now()) @map("created_at")
+
+  @@unique([userId, postId])
+  @@map("likes")
 }
 
 enum DatabasePostStatus {
