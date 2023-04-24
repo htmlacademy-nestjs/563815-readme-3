@@ -17,6 +17,7 @@
   },
   "private": true,
   "dependencies": {
+    "@darraghor/eslint-plugin-nestjs-typed": "^3.20.4",
     "@golevelup/nestjs-rabbitmq": "^3.6.0",
     "@nestjs-modules/mailer": "^1.8.1",
     "@nestjs/common": "^9.0.0",

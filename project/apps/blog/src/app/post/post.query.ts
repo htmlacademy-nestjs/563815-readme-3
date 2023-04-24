@@ -1,5 +1,10 @@
-import { DEFAULT_POST_COUNT_LIMIT, DEFAULT_SORT_DIRECTION } from './constants';
+import {
+  DEFAULT_POST_COUNT_LIMIT,
+  DEFAULT_SORT_DIRECTION,
+  DEFAULT_SORT_TYPE,
+} from './constants';
 import { IsArray, IsIn, IsNumber, IsOptional } from 'class-validator';
+import { SortTypeEnum } from '@project/shared/shared-types';
 import { Transform } from 'class-transformer';
 
 export class PostQuery {
@@ -14,6 +19,10 @@ export class PostQuery {
   @IsArray({})
   @IsOptional()
   public tags?: number[];
+
+  @IsIn(Object.keys(SortTypeEnum))
+  @IsOptional()
+  public sortType: string = DEFAULT_SORT_TYPE;
 
   @IsIn(['asc', 'desc'])
   @IsOptional()

@@ -30,3 +30,11 @@ export type LikeFromClient = {
   postId: number;
   userId: number;
 };
+
+export type SortType = 'date' | 'likes' | 'comments';
+
+export enum SortTypeEnum {
+  date = 'date',
+  likes = 'likes',
+  comments = 'comments',
+}
